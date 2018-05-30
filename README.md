@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/PLATYPUSCO007/CrediHogAR-Backend.svg?branch=master)](https://travis-ci.org/PLATYPUSCO007/CrediHogAR-Backend)
+
 # CrediHogAR-Backend
 
 Software diseñado a medida para la gestion de creditos, ideal para negocios que se dediquen a la venta de accesorios para el hogar, electrodomesticos y/o tecnologia.
