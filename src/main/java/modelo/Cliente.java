@@ -18,6 +18,17 @@ public class Cliente  implements Serializable {
 	public String direccion;
 	@Column
 	public int telefono;
+	@Column 
+	public int DNI;
+	
+	
+	public int getDNI() {
+		return DNI;
+	}
+	
+	public void setDNI(int DNI) {
+		this.DNI=DNI;
+	}
 	
 	public String getNombre() {
 		return nombre;

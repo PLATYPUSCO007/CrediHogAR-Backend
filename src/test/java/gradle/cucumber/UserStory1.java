@@ -1,9 +1,10 @@
 package gradle.cucumber;
 
+import java.util.List;
+
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.junit.Assert;
-
 
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -13,43 +14,40 @@ import repositorio.ClienteDao;
 import repositorio.Runner;
 import repositorio.SessionFactoryProvider;
 
-public class clientePrueba {
+public class UserStory1 {
 	
 	ClienteDao clienteDao; 
 	Cliente cliente; 
 	Session session;
 	Transaction tx;
 	
-	@Given("un sistema")
-	public void un_sistema() {
+	@Given("un inicio de sesion")
+	public void un_inicio_de_sesion() {
 		SessionFactoryProvider.destroy();
 		
 		session = SessionFactoryProvider.getInstance().createSession();
 		tx = session.beginTransaction();
 		
 		Runner.addSession(session);
-		clienteDao = new ClienteDao(); 
+		clienteDao = new ClienteDao();
 	}
 
-	@When("cargo un cliente al sistema")
-	public void cargo_un_cliente_al_sistema() {
+	@When("creo un cliente con sus datos personales")
+	public void creo_un_cliente_con_sus_datos_personales() {
 		cliente = new Cliente();
-		cliente.setNombre("Luciano Scaliogne");
-		cliente.setDireccion("El Zonda 1255");
-		cliente.setTelefono(1123435643);
+		cliente.setNombre("Zoila Perez");
+		cliente.setDireccion("Hyrigoyen 345");
+		cliente.setTelefono(2323);
+		cliente.setDNI(98723489);
 		clienteDao.guardar(cliente);
 		
-		
 		tx.commit();
-		//session.close();
 	}
 
-	@Then("deberia traer su id")
-	public void deberia_traer_su_id() {
-	    Cliente mismoCliente = clienteDao.recuperar("id", 2);
-	    Assert.assertEquals(mismoCliente.getId(),cliente.getId());
-	    session.close();
+	@Then("valido su creacion")
+	public void valido_su_creacion() {
+		List<Cliente> cli = clienteDao.traerTodo(); 
+		Assert.assertNotEquals(null, cli);
 	}
-
 
 }
