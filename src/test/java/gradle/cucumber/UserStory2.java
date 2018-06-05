@@ -4,25 +4,26 @@ import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-import org.junit.Assert;
 
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import junit.framework.Assert;
 import modelo.Cliente;
 import repositorio.ClienteDao;
 import repositorio.Runner;
 import repositorio.SessionFactoryProvider;
 
-public class UserStory1 {
+public class UserStory2 {
 	
-	ClienteDao clienteDao; 
-	Cliente cliente; 
+	ClienteDao clienteDao;
+	Cliente cliente;
 	Session session;
 	Transaction tx;
+	Cliente name;
 	
-	@Given("un inicio de sesion")
-	public void un_inicio_de_sesion() {
+	@Given("inicio de sesion")
+	public void inicio_de_sesion() {
 		SessionFactoryProvider.destroy();
 		
 		session = SessionFactoryProvider.getInstance().createSession();
@@ -31,24 +32,20 @@ public class UserStory1 {
 		Runner.addSession(session);
 		clienteDao = new ClienteDao();
 	}
-
-	@When("creo un cliente con sus datos personales")
-	public void creo_un_cliente_con_sus_datos_personales() {
-		clienteDao.borrarTodo();
+	
+	
+	@When("busco un cliente por su nombre")
+	public void busco_un_cliente_por_su_nombre() {
 		cliente = new Cliente();
-		cliente.setNombre("Zoila Perez");
-		cliente.setDireccion("Hyrigoyen 345");
-		cliente.setTelefono(2323);
-		cliente.setDNI(98723489);
+		cliente.setNombre("Prueba");
 		clienteDao.guardar(cliente);
-		
-		tx.commit();
+		name = clienteDao.recuperar("nombre", "Prueba");
 	}
 
-	@Then("valido su creacion")
-	public void valido_su_creacion() {
-		List<Cliente> cli = clienteDao.traerTodo(); 
-		Assert.assertNotEquals(null, cli);
+	@SuppressWarnings("deprecation")
+	@Then("imprime su nombre en pantalla")
+	public void imprime_su_nombre_en_pantalla() {
+		Assert.assertTrue(clienteDao.contiene(name.getNombre()));
 		session.close();
 	}
 

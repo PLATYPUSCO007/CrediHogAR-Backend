@@ -46,7 +46,7 @@ public class clientePrueba {
 
 	@Then("deberia traer su id")
 	public void deberia_traer_su_id() {
-	    Cliente mismoCliente = clienteDao.recuperar("id", 2);
+	    Cliente mismoCliente = clienteDao.recuperar("id", 1);
 	    Assert.assertEquals(mismoCliente.getId(),cliente.getId());
 	    session.close();
 	}

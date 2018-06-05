@@ -18,7 +18,7 @@ public class Cliente  implements Serializable {
 	public String direccion;
 	@Column
 	public int telefono;
-	@Column 
+	@Column (unique=true)
 	public int DNI;
 	
 	
