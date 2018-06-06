@@ -1,7 +1,5 @@
 package gradle.cucumber;
 
-import java.util.List;
-
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -40,6 +38,8 @@ public class UserStory2 {
 		cliente.setNombre("Prueba");
 		clienteDao.guardar(cliente);
 		name = clienteDao.recuperar("nombre", "Prueba");
+		
+		tx.commit();
 	}
 
 	@SuppressWarnings("deprecation")
