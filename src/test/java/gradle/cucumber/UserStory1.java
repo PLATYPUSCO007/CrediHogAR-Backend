@@ -37,7 +37,8 @@ public class UserStory1 {
 		clienteDao.borrarTodo();
 		cliente = new Cliente();
 		cliente.setNombre("Zoila Perez");
-		cliente.setDireccion("Hyrigoyen 345");
+		cliente.setCalle("Hyrigoyen 345");
+		cliente.setEntreCalle("Andaluz y La boca");
 		cliente.setTelefono(2323);
 		cliente.setDNI(98723489);
 		clienteDao.guardar(cliente);
