@@ -18,7 +18,7 @@ public class UserStory3 {
 	ClienteDao clienteDao;
 	Transaction tx;
 	Session session;
-	Cliente buscardni;
+	Cliente buscarDni;
 	
 	@Given("iniciar sesion")
 	public void iniciar_sesion() {
@@ -37,14 +37,14 @@ public class UserStory3 {
 	    cliente = new Cliente();
 	    cliente.setDNI(12334);
 	    clienteDao.guardar(cliente);
-	    buscardni = clienteDao.recuperar("DNI", 12334);
+	    buscarDni = clienteDao.buscarDni(12334);
 	    
 	    tx.commit();
 	}
 
 	@Then("imprime el DNI en pantalla")
 	public void imprime_el_DNI_en_pantalla() {
-		Assert.assertEquals(cliente.getDNI(), buscardni.getDNI());
+		Assert.assertEquals(cliente.getDNI(), buscarDni.getDNI());
 		session.close();
 	}
 

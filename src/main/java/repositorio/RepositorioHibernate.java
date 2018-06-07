@@ -39,18 +39,9 @@ public class RepositorioHibernate<T> implements Repositorio<T> {
 	@Override
 	public boolean contiene(Serializable key) {
 		boolean res = false;
-		//String[] campos = new String[5];
-		//campos[0] = "nombre";
-		//campos[1] = "DNI";
-		//campos[2] = "telefono";
-		//campos[3] = "direccion";
-		//campos[4] = "id";
+
 		try {
-			//for (int i = 0; i < campos.length; i++) {
-				//if (res == false) {
-					res = (null != this.recuperar("nombre", key));
-				//}
-			//}
+			res = (null != this.recuperar("nombre", key));
 		} catch (Exception e) {
 
 			System.out.println("el entrenador no existe");
