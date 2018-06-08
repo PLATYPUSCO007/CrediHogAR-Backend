@@ -9,7 +9,7 @@ un poco mas de lo establecido como regla en la retroespectiva del Sprint 0.
 
 Sin embargo en el cierre del Sprint 1 se trabajo 53 minutos por dia, lo que es 6,25 horas en total por cada uno, resultando 12,5 horas totales trabajadas. con un cierre total de 4 UserStory de 9 estimadas, es decir un 45% de rendimiento al estimado.
 
-![Grafico de tiempo de trabajo realizado](/Imagenes/tiemporealizado.JPG)
+![Grafico de tiempo de trabajo realizado](https://github.com/PLATYPUSCO007/CrediHogAR-Backend/blob/master/Iteraciones/Iteracion%201/Reestimacion/tiemporealizado.JPG)
 
 ***
 
