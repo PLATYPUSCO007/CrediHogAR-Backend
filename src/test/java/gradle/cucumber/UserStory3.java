@@ -12,16 +12,16 @@ import repositorio.ClienteDao;
 import repositorio.Runner;
 import repositorio.SessionFactoryProvider;
 
-public class UserStory2 {
+public class UserStory3 {
 	
-	ClienteDao clienteDao;
 	Cliente cliente;
-	Session session;
+	ClienteDao clienteDao;
 	Transaction tx;
-	Cliente name;
+	Session session;
+	Cliente buscarDni;
 	
-	@Given("inicio de sesion")
-	public void inicio_de_sesion() {
+	@Given("iniciar sesion")
+	public void iniciar_sesion() {
 		SessionFactoryProvider.destroy();
 		
 		session = SessionFactoryProvider.getInstance().createSession();
@@ -32,20 +32,19 @@ public class UserStory2 {
 	}
 	
 	
-	@When("busco un cliente por su nombre")
-	public void busco_un_cliente_por_su_nombre() {
-		cliente = new Cliente();
-		cliente.setNombre("Alfredo");
-		clienteDao.guardar(cliente);
-		
-		name = clienteDao.buscarNombre("Alfredo");
-		
-		tx.commit();
+	@When("busco un cliente por su DNI")
+	public void busco_un_cliente_por_su_DNI() {
+	    cliente = new Cliente();
+	    cliente.setDNI(12334);
+	    clienteDao.guardar(cliente);
+	    buscarDni = clienteDao.buscarDni(12334);
+	    
+	    tx.commit();
 	}
 
-	@Then("imprime su nombre en pantalla")
-	public void imprime_su_nombre_en_pantalla() {
-		Assert.assertTrue(clienteDao.contiene( "nombre" , name.getNombre()));
+	@Then("imprime el DNI en pantalla")
+	public void imprime_el_DNI_en_pantalla() {
+		Assert.assertEquals(cliente.getDNI(), buscarDni.getDNI());
 		session.close();
 	}
 

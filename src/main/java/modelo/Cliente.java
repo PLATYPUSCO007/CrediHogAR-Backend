@@ -15,11 +15,14 @@ public class Cliente  implements Serializable {
 	@Column
 	public String nombre;
 	@Column
-	public String direccion;
+	public String calle;
+	@Column
+	public String entrecalle;
 	@Column
 	public int telefono;
 	@Column (unique=true)
 	public int DNI;
+	
 	
 	
 	public int getDNI() {
@@ -36,11 +39,17 @@ public class Cliente  implements Serializable {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-	public String getDireccion() {
-		return direccion;
+	public String getCalle() {
+		return calle;
 	}
-	public void setDireccion(String direccion) {
-		this.direccion = direccion;
+	public void setCalle(String calle) {
+		this.calle = calle;
+	}
+	public String getEntreCalle() {
+		return entrecalle;
+	}
+	public void setEntreCalle(String entrecalle) {
+		this.entrecalle = entrecalle;
 	}
 	public int getTelefono() {
 		return telefono;

@@ -1,4 +1,4 @@
-Feature: Como cliente quiero crear un cliente en el sistema con sus datos personales
+Feature: Como usuario quiero crear un cliente en el sistema con sus datos personales
 
   Scenario: Crear im cliente en el sistema con sus datos personales
     Given un inicio de sesion
