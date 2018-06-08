@@ -39,20 +39,6 @@ public class RepositorioHibernate<T> implements Repositorio<T>{
 	}
 
 	@Override
-	public boolean contiene(Serializable key) {
-		boolean res = false;
-		try{
-			res = (null != this.recuperar("nombre", key));
-		}
-		catch (Exception e) {
-
-		     System.out.println("el entrenador no existe");
-
-		}
-		return res;
-	}
-
-	@Override
 	public void borrar(Serializable key) {
 		Session session = Runner.getCurrentSession();
 		session.delete(this.recuperar(key));				
@@ -82,6 +68,21 @@ public class RepositorioHibernate<T> implements Repositorio<T>{
 		query.setMaxResults(1);
 		return (T) query.getSingleResult();
         		
+	}
+
+
+	@Override
+	public boolean contiene(String campo, Serializable key) {
+		boolean res = false;
+		try{
+			res = (null != this.recuperar(campo, key));
+		}
+		catch (Exception e) {
+
+		     System.out.println("no se encuentra en la base de datos");
+
+		}
+		return res;
 	}	
 
 }

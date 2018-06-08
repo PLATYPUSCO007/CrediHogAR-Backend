@@ -4,11 +4,11 @@ import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.junit.Assert;
 
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
-import junit.framework.Assert;
 import modelo.Cliente;
 import repositorio.ClienteDao;
 import repositorio.Runner;
@@ -42,10 +42,9 @@ public class UserStory2 {
 		name = clienteDao.recuperar("nombre", "Prueba");
 	}
 
-	@SuppressWarnings("deprecation")
 	@Then("imprime su nombre en pantalla")
 	public void imprime_su_nombre_en_pantalla() {
-		Assert.assertTrue(clienteDao.contiene(name.getNombre()));
+		Assert.assertTrue(clienteDao.contiene( "nombre" , name.getNombre()));
 		session.close();
 	}
 
