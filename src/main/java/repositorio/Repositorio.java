@@ -35,7 +35,7 @@ public interface Repositorio<T> {
 		 * @param String , String
 		 */
 		
-		boolean contiene(Serializable key);
+		boolean contiene(String campo ,Serializable key);
 		
 		/**
 		 * borra de la base de datos el objeto pasado como parmetro
