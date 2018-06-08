@@ -35,7 +35,8 @@ public class clientePrueba {
 	public void cargo_un_cliente_al_sistema() {
 		cliente = new Cliente();
 		cliente.setNombre("Luciano Scaliogne");
-		cliente.setDireccion("El Zonda 1255");
+		cliente.setCalle("El Zonda 1255");
+		cliente.setEntreCalle("Zulia y Mimbre");
 		cliente.setTelefono(1123435643);
 		clienteDao.guardar(cliente);
 		

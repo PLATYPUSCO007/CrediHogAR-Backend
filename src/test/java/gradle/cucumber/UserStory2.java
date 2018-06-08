@@ -1,7 +1,5 @@
 package gradle.cucumber;
 
-import java.util.List;
-
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -37,11 +35,15 @@ public class UserStory2 {
 	@When("busco un cliente por su nombre")
 	public void busco_un_cliente_por_su_nombre() {
 		cliente = new Cliente();
-		cliente.setNombre("Prueba");
+		cliente.setNombre("Alfredo");
 		clienteDao.guardar(cliente);
-		name = clienteDao.recuperar("nombre", "Prueba");
+		
+		name = clienteDao.buscarNombre("Alfredo");
+		
+		tx.commit();
 	}
 
+	
 	@SuppressWarnings("deprecation")
 	@Then("imprime su nombre en pantalla")
 	public void imprime_su_nombre_en_pantalla() {
