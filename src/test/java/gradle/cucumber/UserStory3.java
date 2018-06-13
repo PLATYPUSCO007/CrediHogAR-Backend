@@ -13,33 +13,32 @@ import repositorio.Runner;
 import repositorio.SessionFactoryProvider;
 
 public class UserStory3 {
-	
+
 	Cliente cliente;
 	ClienteDao clienteDao;
 	Transaction tx;
 	Session session;
 	Cliente buscarDni;
-	
+
 	@Given("iniciar sesion")
 	public void iniciar_sesion() {
 		SessionFactoryProvider.destroy();
-		
+
 		session = SessionFactoryProvider.getInstance().createSession();
 		tx = session.beginTransaction();
-		
+
 		Runner.addSession(session);
 		clienteDao = new ClienteDao();
 	}
-	
-	
+
 	@When("busco un cliente por su DNI")
 	public void busco_un_cliente_por_su_DNI() {
-	    cliente = new Cliente();
-	    cliente.setDNI(12334);
-	    clienteDao.guardar(cliente);
-	    buscarDni = clienteDao.buscarDni(12334);
-	    
-	    tx.commit();
+		cliente = new Cliente();
+		cliente.setDNI(12334);
+		clienteDao.guardar(cliente);
+		buscarDni = clienteDao.buscarDni(12334);
+
+		tx.commit();
 	}
 
 	@Then("imprime el DNI en pantalla")
