@@ -15,6 +15,8 @@ public class Cliente implements Serializable {
 	@Column
 	public String nombre;
 	@Column
+	public String apellido;
+	@Column
 	public String calle;
 	@Column
 	public String entrecalle;
@@ -37,6 +39,14 @@ public class Cliente implements Serializable {
 
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
+	}
+	
+	public String getApellido() {
+		return apellido;
+	}
+	
+	public void setApellido(String apellido) {
+		this.apellido=apellido;
 	}
 
 	public String getCalle() {

@@ -48,7 +48,7 @@ public interface Repositorio<T> {
 	 * 
 	 * @param T
 	 */
-	void borrar(Serializable key);
+	void borrar(String campo, Serializable key);
 
 	/**
 	 * trae de la base de datos todos los objetos persistidos de la tabla

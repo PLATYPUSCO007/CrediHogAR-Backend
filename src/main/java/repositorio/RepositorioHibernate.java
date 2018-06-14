@@ -38,9 +38,9 @@ public class RepositorioHibernate<T> implements Repositorio<T> {
 	}
 
 	@Override
-	public void borrar(Serializable key) {
+	public void borrar(String campo, Serializable key) {
 		Session session = Runner.getCurrentSession();
-		session.delete(this.recuperar(key));
+		session.delete(this.recuperar(campo, key));
 	}
 
 	@Override
