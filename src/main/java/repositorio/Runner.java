@@ -5,36 +5,34 @@ import java.util.function.Supplier;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-
-
 public class Runner {
-	
+
 	public static final ThreadLocal<Session> CONTEXTO = new ThreadLocal<>();
-	
+
 	public static <T> T runInSession(Supplier<T> bloque) {
 		// permite anidar llamadas a Runner sin abrir una nueva
 		// Sessino cada vez (usa la que abrio la primera vez)
 		if (CONTEXTO.get() != null) {
 			return bloque.get();
 		}
-		
+
 		Session session = null;
 		Transaction tx = null;
-		
+
 		try {
 			session = SessionFactoryProvider.getInstance().createSession();
 			tx = session.beginTransaction();
-			
+
 			CONTEXTO.set(session);
-			
-			//codigo de negocio
+
+			// codigo de negocio
 			T resultado = bloque.get();
-			
+
 			tx.commit();
 			return resultado;
 		} catch (RuntimeException e) {
-			//solamente puedo cerrar la transaccion si fue abierta antes,
-			//puede haberse roto el metodo ANTES de abrir una transaccion
+			// solamente puedo cerrar la transaccion si fue abierta antes,
+			// puede haberse roto el metodo ANTES de abrir una transaccion
 			if (tx != null && tx.isActive()) {
 				tx.rollback();
 			}
@@ -45,9 +43,9 @@ public class Runner {
 				session.close();
 				return null;
 			}
-	
+
 		}
-		
+
 	}
 
 	public static Session getCurrentSession() {
@@ -57,8 +55,9 @@ public class Runner {
 		}
 		return session;
 	}
-	public static void addSession(Session session){
+
+	public static void addSession(Session session) {
 		CONTEXTO.set(session);
 	}
-	
+
 }

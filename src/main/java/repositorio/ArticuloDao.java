@@ -6,7 +6,7 @@ public class ArticuloDao extends RepositorioHibernate<Articulo> {
 
 	public ArticuloDao() {
 		super(Articulo.class);
-	
+
 	}
 
 }

@@ -15,19 +15,19 @@ import repositorio.Runner;
 import repositorio.SessionFactoryProvider;
 
 public class UserStory1 {
-	
-	ClienteDao clienteDao; 
-	Cliente cliente; 
+
+	ClienteDao clienteDao;
+	Cliente cliente;
 	Session session;
 	Transaction tx;
-	
+
 	@Given("un inicio de sesion")
 	public void un_inicio_de_sesion() {
 		SessionFactoryProvider.destroy();
-		
+
 		session = SessionFactoryProvider.getInstance().createSession();
 		tx = session.beginTransaction();
-		
+
 		Runner.addSession(session);
 		clienteDao = new ClienteDao();
 	}
@@ -42,13 +42,13 @@ public class UserStory1 {
 		cliente.setTelefono(2323);
 		cliente.setDNI(98723489);
 		clienteDao.guardar(cliente);
-		
+
 		tx.commit();
 	}
 
 	@Then("valido su creacion")
 	public void valido_su_creacion() {
-		List<Cliente> cli = clienteDao.traerTodo(); 
+		List<Cliente> cli = clienteDao.traerTodo();
 		Assert.assertNotEquals(null, cli);
 		session.close();
 	}

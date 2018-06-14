@@ -1,6 +1,7 @@
 package repositorio;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 import org.hibernate.Session;
@@ -62,23 +63,29 @@ public class RepositorioHibernate<T> implements Repositorio<T> {
 		Query<T> query = session.createQuery(hql, tipo);
 		query.setParameter("valor", valor);
 		query.setMaxResults(1);
-		return (T) query.getSingleResult();	
+		return (T) query.getSingleResult();
 	}
-
 
 	@Override
 	public boolean contiene(String campo, Serializable key) {
 		boolean res = false;
-		try{
+		try {
 			res = (null != this.recuperar(campo, key));
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 
-		     System.out.println("no se encuentra en la base de datos");
+			System.out.println("no se encuentra en la base de datos");
 
 		}
 		return res;
-	}	
+	}
 
+
+	public long recaudoMensual(String fecha1, String fecha2) {
+		Session session = Runner.getCurrentSession();
+		String hql = " SELECT SUM(p.monto) FROM Pago p WHERE p.fecha BETWEEN '" + fecha1 + "' AND '" + fecha2 + "' ";
+		Query query = session.createQuery(hql);
+		long cantidad = (long) query.uniqueResult();
+		return cantidad;
+	}
 
 }
