@@ -17,6 +17,14 @@ public class ClienteDao extends RepositorioHibernate<Cliente> {
 		}
 		return cliente;
 	}
+	
+	public Cliente buscarApellido(String apellido) {
+		try {
+			cliente = this.recuperar("apellido", apellido);
+		} catch (Exception e) {
+		}
+		return cliente;
+	}
 
 	public Cliente buscarDni(int dni) {
 		try {
