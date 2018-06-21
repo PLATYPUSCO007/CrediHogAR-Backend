@@ -49,6 +49,7 @@ public class BuscarUnArticuloPorNombre {
 	@Then("imprime el campo buscado")
 	public void imprime_el_campo_buscado() {
 	    Assert.assertEquals("Iphone", articuloNombre.getNombre());
+	    session.close();
 	}
 
 
