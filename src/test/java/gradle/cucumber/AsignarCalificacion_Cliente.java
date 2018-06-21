@@ -9,7 +9,6 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import modelo.Cliente;
-import repositorio.ArticuloDao;
 import repositorio.ClienteDao;
 import repositorio.Runner;
 import repositorio.SessionFactoryProvider;
