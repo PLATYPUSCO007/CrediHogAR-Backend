@@ -1,9 +1,7 @@
 package gradle.cucumber;
 
-import static org.junit.Assert.assertEquals;
 
 import java.text.ParseException;
-import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
