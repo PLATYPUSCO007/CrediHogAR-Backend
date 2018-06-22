@@ -24,6 +24,33 @@ public class Cliente implements Serializable {
 	public int telefono;
 	@Column(unique = true)
 	public int DNI;
+	@Column
+	public String calificacion;
+	
+	
+	public enum CalificacionUsuario {
+		APTO("Apto"),
+		NO_APTO("No Apto");
+		
+		private CalificacionUsuario(String calificacion) {
+			this.calificacion= calificacion;
+		}
+		
+		private String getCalificacion() {
+			return calificacion;
+		}
+		
+		private String calificacion;
+	};
+	
+	public void setCalificacion(String calificacion) {
+		CalificacionUsuario calificacionuser = Enum.valueOf(CalificacionUsuario.class, calificacion);
+		this.calificacion=calificacionuser.getCalificacion();
+	}
+	
+	public String getCalificacion() {
+		return calificacion;
+	}
 
 	public int getDNI() {
 		return DNI;
