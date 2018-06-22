@@ -1,6 +1,8 @@
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 
+import modelo.Cliente;
+import repositorio.ClienteDao;
 import repositorio.Runner;
 import repositorio.SessionFactoryProvider;
 
@@ -12,16 +14,22 @@ public class Library {
 	public static void main(String[] args) {
 
 		/**
+		ClienteDao clienteDao = new ClienteDao();
+		Cliente cliente = new Cliente();
 		Session session;
 		
 		session = SessionFactoryProvider.getInstance().createSession();
 
 		Runner.addSession(session);
 		
-		String hql = " SELECT SUM(p.monto) FROM Pago p WHERE p.fecha BETWEEN '2017-10-01' AND '2018-02-20' ";
+		//String hql = " SELECT SUM(p.monto) FROM Pago p WHERE p.fecha BETWEEN '2017-10-01' AND '2018-02-20' ";
+		String hql = "FROM Cliente c WHERE c.calificacion IS 'No Apto'";
 		Query query = session.createQuery(hql);
-		long cantidad = (long) query.uniqueResult();
-		System.out.println("El total es: " + cantidad);
+		//long cantidad = (long) query.uniqueResult();
+		Cliente resultado = (Cliente) query.getSingleResult();
+		
+		System.out.println("El total es: " + resultado.getNombre() + " " + resultado.getCalificacion());
+		
 		session.close();
 		
 		
