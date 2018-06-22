@@ -1,29 +1,28 @@
 package gradle.cucumber;
 
-
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-import org.junit.Assert;
+import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import org.junit.Assert;
 import modelo.Cliente;
 import repositorio.ClienteDao;
 import repositorio.Runner;
 import repositorio.SessionFactoryProvider;
 
-public class BuscarClienteporID {
+public class BuscarUnClientePorCalificacion {
 	
-	Cliente cliente;
-	Cliente cliente2;
-	ClienteDao clienteDao;
-	Transaction tx;
 	Session session;
-	Cliente buscarID;
+	Transaction tx;
+	Cliente cliente;
+	ClienteDao clienteDao;
+	Cliente clienteBuscar;
 	
-	@Given("iniciar una sesion")
-	public void iniciar_una_sesion() {
+	@Given("inicia el sistema")
+	public void inicia_el_sistema() {
 		SessionFactoryProvider.destroy();
 
 		session = SessionFactoryProvider.getInstance().createSession();
@@ -33,8 +32,8 @@ public class BuscarClienteporID {
 		clienteDao = new ClienteDao();
 	}
 
-	@When("busco un cliente por su ID")
-	public void busco_un_cliente_por_su_ID() {
+	@When("Guardo cliente")
+	public void guardo_cliente() {
 		cliente = new Cliente();
 		cliente.setNombre("Carlos");
 		cliente.setApellido("Perez");
@@ -42,24 +41,20 @@ public class BuscarClienteporID {
 		cliente.setEntreCalle("chirimuyo");
 		cliente.setTelefono(12312);
 		cliente.setDNI(123);
+		cliente.setCalificacion("APTO");
 		clienteDao.guardar(cliente);
-		
-		cliente2 = new Cliente();
-		cliente2.setNombre("Sofia");
-		cliente2.setApellido("Lopez");
-		cliente2.setCalle("Semedo 987");
-		cliente2.setEntreCalle("Ponsio");
-		cliente2.setTelefono(9543);
-		cliente2.setDNI(46457);
-		clienteDao.guardar(cliente2);
-	    tx.commit();
 	    
-	    buscarID = clienteDao.buscarID(1);
 	}
 
-	@Then("imprime el ID en pantalla")
-	public void imprime_el_ID_en_pantalla() {
-	    Assert.assertEquals(cliente.getId(), buscarID.getId());
+	@And("Busco el cliente por su calificacion")
+	public void busco_el_cliente_por_su_calificacion() {
+		clienteBuscar = clienteDao.buscarCalificacion("Apto");
+		tx.commit();
+	}
+
+	@Then("devuelve sus datos")
+	public void devuelve_sus_datos() {
+	    Assert.assertEquals("Apto", clienteBuscar.getCalificacion());
 	}
 
 

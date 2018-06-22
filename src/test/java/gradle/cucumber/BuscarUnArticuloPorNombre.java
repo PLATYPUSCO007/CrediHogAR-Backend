@@ -43,7 +43,7 @@ public class BuscarUnArticuloPorNombre {
 
 	@And("lo busco por su nombre")
 	public void lo_busco_por_su_nombre() {
-	    articuloNombre = articuloDao.recuperar("nombre", "Iphone");
+	    articuloNombre = articuloDao.buscarNombre("Iphone");
 	}
 
 	@Then("imprime el campo buscado")

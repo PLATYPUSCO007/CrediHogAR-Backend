@@ -19,6 +19,7 @@ public class AsignarCalificacion_Cliente {
 	Transaction tx;
 	Cliente cliente;
 	ClienteDao clienteDao;
+	Cliente calificacionCliente;
 	
 
 	@Given("inicia sesion")
@@ -41,7 +42,6 @@ public class AsignarCalificacion_Cliente {
 		cliente.setEntreCalle("Palermo");
 		cliente.setDNI(86544);
 		cliente.setTelefono(972340);
-
 	}
 
 	@And("le asigno una calificacion")
@@ -49,11 +49,13 @@ public class AsignarCalificacion_Cliente {
 		cliente.setCalificacion("NO_APTO");
 		clienteDao.guardar(cliente);
 		tx.commit();
+		
+		calificacionCliente = clienteDao.recuperar("calificacion", "No Apto");
 	}
 
 	@Then("imprime la calificacion")
 	public void imprime_la_calificacion() {
-		Assert.assertTrue(clienteDao.contiene("calificacion", "No Apto"));	
+		Assert.assertEquals("No Apto", calificacionCliente.getCalificacion());	
 		session.close();
 	}
 
