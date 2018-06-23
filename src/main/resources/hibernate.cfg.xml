@@ -21,7 +21,7 @@
 		<property name="show_sql">true</property>
 		
 
-		<!--property name="hibernate.hbm2ddl.auto">create-drop</property--> 
+		<property name="hibernate.hbm2ddl.auto">create-drop</property> 
 		<mapping class="modelo.Cliente" />
 		<mapping class="modelo.Articulo" />
 		<mapping class="modelo.Pago" />

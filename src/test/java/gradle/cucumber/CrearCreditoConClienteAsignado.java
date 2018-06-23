@@ -28,7 +28,7 @@ public class CrearCreditoConClienteAsignado {
 
 	@Given("pantalla inicial de un sistema")
 	public void pantalla_inicial_de_un_sistema() {
-	    creditoDao  = new CreditoDao(); 
+		creditoDao  = new CreditoDao(); 
 	    credito = new Credito();
 	    SessionFactoryProvider.destroy();
 

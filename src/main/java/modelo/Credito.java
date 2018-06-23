@@ -5,8 +5,11 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.CascadeType;
+
 @Entity
 public class Credito implements Serializable  {
 	@Id
@@ -21,7 +24,7 @@ public class Credito implements Serializable  {
 	FormaDePago formaDePago;
 	@Column
 	int cuotas;
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY,  cascade = CascadeType.ALL )
 	Cliente cliente;
 	
 	public String getCodigo() {
