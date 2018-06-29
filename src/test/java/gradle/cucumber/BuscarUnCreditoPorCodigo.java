@@ -64,6 +64,7 @@ public class BuscarUnCreditoPorCodigo {
 	@Then("me devuelve todos losdatos del credito")
 	public void me_devuelve_todos_losdatos_del_credito() {
 		assertEquals(creditoRecuperado.getCodigo(),"A-3947");
+		session.close();
 	}
 
 
