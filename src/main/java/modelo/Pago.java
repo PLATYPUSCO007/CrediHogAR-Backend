@@ -3,12 +3,17 @@ package modelo;
 import java.io.Serializable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -22,6 +27,9 @@ public class Pago implements Serializable {
 	public Date fecha;
 	@Column
 	public int monto;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name="credito_codigo")
+	Credito credito;
 
 	public Date getFecha() {
 		return fecha;
@@ -48,5 +56,16 @@ public class Pago implements Serializable {
 	public void setMonto(int monto) {
 		this.monto = monto;
 	}
+	
+	public void setcredito(Credito credito) {
+		this.credito=credito;
+	}
+	
+	public Credito getcredito() {
+		return credito;
+	}
+	
+	
+	
 
 }

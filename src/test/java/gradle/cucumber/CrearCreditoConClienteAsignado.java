@@ -46,8 +46,7 @@ public class CrearCreditoConClienteAsignado {
 		credito.setFormaDePago(FormaDePago.SEMANAL );
 		credito.setAnticipo(300);
 		credito.setCuotas(4);
-		credito.setCliente(new Cliente());
-		
+		credito.setCliente(new Cliente());	
 	}
 
 	@When("asigno un cliente")
