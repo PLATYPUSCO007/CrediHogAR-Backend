@@ -1,7 +1,6 @@
 package repositorio;
 
 import java.io.Serializable;
-import java.util.Date;
 import java.util.List;
 
 import org.hibernate.Session;
@@ -89,5 +88,12 @@ public class RepositorioHibernate<T> implements Repositorio<T> {
 		return cantidad;
 	}
 	
-
+	public List<Pago> buscarpagos(String codigo) {
+		Session session = Runner.getCurrentSession();
+		String hql = "FROM Pago p WHERE p.credito IS '" + codigo + "' ";
+		Query query = session.createQuery(hql);
+		List<Pago> cantidad = (List<Pago>) query.getResultList();
+		return cantidad;
+	}
+	
 }
