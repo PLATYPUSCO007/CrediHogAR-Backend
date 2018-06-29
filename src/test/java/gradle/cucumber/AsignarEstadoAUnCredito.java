@@ -10,24 +10,24 @@ import org.hibernate.Transaction;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
-import junit.framework.Assert;
 import modelo.Cliente;
 import modelo.Credito;
+import modelo.EstadoDeCredito;
 import modelo.FormaDePago;
-import repositorio.ClienteDao;
 import repositorio.CreditoDao;
 import repositorio.Runner;
 import repositorio.SessionFactoryProvider;
 
-public class CrearCreditoConClienteAsignado {
+public class AsignarEstadoAUnCredito {
 	
 	CreditoDao creditoDao;
 	Credito credito;
 	Session session;
 	Transaction tx;
-
-	@Given("pantalla inicial de un sistema")
-	public void pantalla_inicial_de_un_sistema() {
+	Credito creditoRecuperado;
+	
+	@Given("un credito Existente")
+	public void un_credito_Existente() {
 		creditoDao  = new CreditoDao(); 
 	    credito = new Credito();
 	    SessionFactoryProvider.destroy();
@@ -36,21 +36,15 @@ public class CrearCreditoConClienteAsignado {
 		tx = session.beginTransaction();
 
 		Runner.addSession(session);
-	}
-
-	@When("cargo los datos de un credito")
-	public void cargo_los_datos_de_un_credito() {
+		
 		credito.setCodigo("A-3947");
 		credito.setFechaDeInicio(new Date() );
 		credito.setFechaDeVencimiento(new Date());
 		credito.setFormaDePago(FormaDePago.SEMANAL );
 		credito.setAnticipo(300);
 		credito.setCuotas(4);
-		credito.setCliente(new Cliente());	
-	}
-
-	@When("asigno un cliente")
-	public void asigno_un_cliente() {
+		credito.setCliente(new Cliente());
+		
 		Cliente unCliente = new Cliente();
 		unCliente.setNombre("Ruben");
 		unCliente.setApellido("Lozano");
@@ -59,20 +53,25 @@ public class CrearCreditoConClienteAsignado {
 		unCliente.setEntreCalle("Laprida y Beruti");
 		unCliente.setTelefono(42370657);
 		credito.setCliente(unCliente);
-		
-	}
-
-	@When("doy guardar")
-	public void doy_guardar() {
 		creditoDao.guardar(credito);
-		tx.commit();
 		
+		//tx.commit();
+		creditoRecuperado = creditoDao.traerPorId("A-3947");
 	}
 
-	@Then("el credito se guarda en la base de datos del sistema")
-	public void el_credito_se_guarda_en_la_base_de_datos_del_sistema() {
-		assertEquals(creditoDao.traerPorId("A-3947").getCodigo(),"A-3947");
+	@When("le asigno un estado")
+	public void le_asigno_un_estado() {
+		
+		creditoRecuperado.setEstado(EstadoDeCredito.PAGO);
+		creditoDao.actualizar(creditoRecuperado);
+	//	tx.commit();
+	}
+
+	@Then("el estado se guarda en la bd con el credito")
+	public void el_estado_se_guarda_en_la_bd_con_el_credito() {
+		assertEquals(creditoDao.traerPorId("A-3947").getEstado().name(), EstadoDeCredito.PAGO.name());
+		tx.commit();
 		session.close();
 	}
-	
+
 }
