@@ -13,6 +13,7 @@ import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import modelo.Cliente;
 import modelo.Credito;
 import modelo.FormaDePago;
 import modelo.Pago;
@@ -47,12 +48,20 @@ public class BuscarPagosDeUnCredito {
 
 	@When("cargo datos de un credito")
 	public void cargo_datos_de_un_credito() {
-		credito.setCodigo("A-3948");
+		credito.setCodigo("A-3944");
 		credito.setFechaDeInicio(new Date() );
 		credito.setFechaDeVencimiento(new Date());
 		credito.setFormaDePago(FormaDePago.SEMANAL );
 		credito.setAnticipo(300);
 		credito.setCuotas(4);
+		Cliente unCliente = new Cliente();
+		unCliente.setNombre("Ruben");
+		unCliente.setApellido("Lozano");
+		unCliente.setCalle("Calingasta N°2635");
+		unCliente.setDNI(33867530);
+		unCliente.setEntreCalle("Laprida y Beruti");
+		unCliente.setTelefono(42370657);
+		credito.setCliente(unCliente);
 	}
 
 	@And("asigno varios pagos")
@@ -74,7 +83,7 @@ public class BuscarPagosDeUnCredito {
 	
 	@And("Busco los pagos asignados segun el codigo del credito")
 	public void busco_los_pagos_asignados_segun_el_codigo_del_credito() {
-	    pagosCredito = creditoDao.buscarPagos("A-3948");
+	    pagosCredito = creditoDao.buscarPagos("A-3944");
 	}
 
 	@Then("traigo los pagos")

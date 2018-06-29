@@ -30,7 +30,7 @@ public class Credito implements Serializable  {
 	int cuotas;
 	@ManyToOne(fetch = FetchType.LAZY,  cascade = CascadeType.ALL)
 	Cliente cliente;
-	@OneToMany(cascade=CascadeType.ALL,  mappedBy="credito")
+	@OneToMany(fetch = FetchType.EAGER, cascade=CascadeType.ALL,  mappedBy="credito")
 	List<Pago> unpago = new ArrayList<Pago>();
 	
 	

@@ -27,7 +27,7 @@ public class Pago implements Serializable {
 	public Date fecha;
 	@Column
 	public int monto;
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name="credito_codigo")
 	Credito credito;
 
