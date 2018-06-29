@@ -1,13 +1,17 @@
 package modelo;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+
 import javax.persistence.CascadeType;
 
 @Entity
@@ -24,8 +28,12 @@ public class Credito implements Serializable  {
 	FormaDePago formaDePago;
 	@Column
 	int cuotas;
-	@ManyToOne(fetch = FetchType.LAZY,  cascade = CascadeType.ALL )
+	@ManyToOne(fetch = FetchType.LAZY,  cascade = CascadeType.ALL)
 	Cliente cliente;
+	@OneToMany(cascade=CascadeType.ALL,  mappedBy="credito")
+	List<Pago> unpago = new ArrayList<Pago>();
+	
+	
 	
 	public String getCodigo() {
 		return codigo;
@@ -68,6 +76,24 @@ public class Credito implements Serializable  {
 	}
 	public void setCliente(Cliente cliente) {
 		this.cliente = cliente;
+	}
+	
+	public List<Pago> getunpago() {
+		return unpago;
+	}
+	
+	public void setunpago(List<Pago> unPago) {
+		this.unpago = unPago;
+	}
+	
+	public void addunpago(Pago pago) {
+		this.unpago.add(pago);
+		pago.setcredito(this);
+	}
+	
+	public void removepago(Pago pago) {
+		this.unpago.remove(pago);
+		pago.setcredito(null);
 	}
 	
 

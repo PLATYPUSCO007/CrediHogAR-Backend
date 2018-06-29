@@ -7,6 +7,8 @@ import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 
+import modelo.Pago;
+
 public class RepositorioHibernate<T> implements Repositorio<T> {
 
 	private Class<T> tipo;
@@ -54,7 +56,6 @@ public class RepositorioHibernate<T> implements Repositorio<T> {
 	public void borrarTodo() {
 		Session session = Runner.getCurrentSession();
 		session.createQuery("delete from " + tipo.getSimpleName()).executeUpdate();
-
 	}
 
 	public T recuperar(String campo, Serializable valor) {
@@ -87,5 +88,6 @@ public class RepositorioHibernate<T> implements Repositorio<T> {
 		long cantidad = (long) query.uniqueResult();
 		return cantidad;
 	}
+	
 
 }
