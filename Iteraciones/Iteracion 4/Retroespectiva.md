@@ -1,5 +1,5 @@
 
-# RESTROESPECTIVA - SPRINT 3
+# RESTROESPECTIVA - SPRINT 4
 ***
 
 ## Tecnica de Retroespectiva
@@ -23,7 +23,7 @@ Sergio Guzman
 
 ## Comentarios
 
-Se cumplieron los acuerdos, y no se realizaran modificaciones de estos para este Sprint.
+Se cumplio con el tiempo de trabajo estimado pero no fue suficiente para cumplir con las UserStories estimadas, se comunico en el equipo las dificultades que se presentaron a lo largo del Sprint y se dio una solucion a estos. Se mantienen los acuerdos ya que se ven resultados de mejora en cada entrega de sprint.
 
 ### Acuerdos
 
