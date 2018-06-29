@@ -26,4 +26,5 @@ public class PagoDao extends RepositorioHibernate<Pago> {
 		return resultado;
 	}
 
+
 }
