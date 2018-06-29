@@ -30,11 +30,15 @@ public class Credito implements Serializable  {
 	int cuotas;
 	@ManyToOne(fetch = FetchType.LAZY,  cascade = CascadeType.ALL)
 	Cliente cliente;
+	@Column
+	EstadoDeCredito estado;
+
 	@OneToMany(cascade=CascadeType.ALL,  mappedBy="credito")
 	List<Pago> unpago = new ArrayList<Pago>();
-	
-	
-	
+		
+	public Credito(){
+		estado = EstadoDeCredito.VIGENTE;
+	}
 	public String getCodigo() {
 		return codigo;
 	}
@@ -77,6 +81,12 @@ public class Credito implements Serializable  {
 	public void setCliente(Cliente cliente) {
 		this.cliente = cliente;
 	}
+	public EstadoDeCredito getEstado() {
+		return estado;
+	}
+	public void setEstado(EstadoDeCredito estado) {
+		this.estado = estado;
+	}
 	
 	public List<Pago> getunpago() {
 		return unpago;
@@ -96,5 +106,4 @@ public class Credito implements Serializable  {
 		pago.setcredito(null);
 	}
 	
-
 }

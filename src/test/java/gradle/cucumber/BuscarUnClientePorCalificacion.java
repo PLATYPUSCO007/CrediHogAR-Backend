@@ -55,6 +55,7 @@ public class BuscarUnClientePorCalificacion {
 	@Then("devuelve sus datos")
 	public void devuelve_sus_datos() {
 	    Assert.assertEquals("Apto", clienteBuscar.getCalificacion());
+	    session.close();
 	}
 
 

@@ -60,6 +60,7 @@ public class BuscarClienteporID {
 	@Then("imprime el ID en pantalla")
 	public void imprime_el_ID_en_pantalla() {
 	    Assert.assertEquals(cliente.getId(), buscarID.getId());
+	    session.close();
 	}
 
 
