@@ -4,8 +4,11 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Articulo implements Serializable {
@@ -23,6 +26,29 @@ public class Articulo implements Serializable {
 	public Integer costo;
 	@Column
 	public Integer precio;
+	@Column
+	public Integer Comision;
+	
+//	@ManyToOne(fetch = FetchType.EAGER)
+//	@JoinColumn(name="credito_articulo")
+//	Credito credito;
+//	
+//	
+//	public Credito getCredito() {
+//		return credito;
+//	}
+//
+//	public void setCredito(Credito credito) {
+//		this.credito = credito;
+//	}
+
+	public Integer getComision() {
+		return Comision;
+	}
+
+	public void setComision(Integer comision) {
+		Comision = comision;
+	}
 
 	public int getId() {
 		return id;
