@@ -9,8 +9,15 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.CascadeType;
 
@@ -30,13 +37,20 @@ public class Credito implements Serializable  {
 	int cuotas;
 	@ManyToOne(fetch = FetchType.LAZY,  cascade = CascadeType.ALL)
 	Cliente cliente;
-
 	@Column
 	EstadoDeCredito estado;
-	
 	@OneToMany(fetch = FetchType.EAGER, cascade=CascadeType.ALL,  mappedBy="credito")
+
 	List<Pago> pagos = new ArrayList<Pago>();
-		
+	
+	//@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	  @ManyToMany
+      @JoinTable(name = "credito_articulo",
+      joinColumns = {@JoinColumn(name = "credito_codigo")},
+      inverseJoinColumns = {@JoinColumn(name = "articulos_id")})
+	List<Articulo> articulos = new ArrayList<Articulo>();	
+	
+
 	public Credito(){
 		estado = EstadoDeCredito.VIGENTE;
 	}
@@ -106,5 +120,15 @@ public class Credito implements Serializable  {
 		this.pagos.remove(pago);
 		pago.setcredito(null);
 	}
+	public void AgregarUnArticulo(Articulo unArticulo) {
+		this.articulos.add(unArticulo);	
+	}
+	public List<Articulo> getArticulos() {
+		return articulos;
+	}
+	public void setArticulos(List<Articulo> articulos) {
+		this.articulos = articulos;
+	}
+	
 	
 }
