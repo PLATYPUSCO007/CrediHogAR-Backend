@@ -1,7 +1,13 @@
 package repositorio;
 
+import java.util.List;
+
+import org.hibernate.Session;
+import org.hibernate.query.Query;
+
 import modelo.Articulo;
 import modelo.Cliente;
+import modelo.Pago;
 
 public class ArticuloDao extends RepositorioHibernate<Articulo> {
 
@@ -27,5 +33,12 @@ public class ArticuloDao extends RepositorioHibernate<Articulo> {
 		}
 		return articulo;
 	}
-
+	public List<Articulo> buscarNombreSimilares(String nombre) {
+		String nombreBuscado = "%" + nombre + "%";
+		Session session = Runner.getCurrentSession();
+		String hql = "FROM Articulo a WHERE a.nombre LIKE '" + nombreBuscado + "' ";
+		Query query = session.createQuery(hql);
+		List<Articulo> articulos = (List<Articulo>) query.getResultList();
+		return articulos;
+	}
 }
