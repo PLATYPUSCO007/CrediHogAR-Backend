@@ -35,7 +35,7 @@ public class Credito implements Serializable  {
 	EstadoDeCredito estado;
 	
 	@OneToMany(fetch = FetchType.EAGER, cascade=CascadeType.ALL,  mappedBy="credito")
-	List<Pago> unpago = new ArrayList<Pago>();
+	List<Pago> pagos = new ArrayList<Pago>();
 		
 	public Credito(){
 		estado = EstadoDeCredito.VIGENTE;
@@ -90,20 +90,20 @@ public class Credito implements Serializable  {
 	}
 	
 	public List<Pago> getunpago() {
-		return unpago;
+		return pagos;
 	}
 	
 	public void setunpago(List<Pago> unPago) {
-		this.unpago = unPago;
+		this.pagos = unPago;
 	}
 	
 	public void addunpago(Pago pago) {
-		this.unpago.add(pago);
+		this.pagos.add(pago);
 		pago.setcredito(this);
 	}
 	
 	public void removepago(Pago pago) {
-		this.unpago.remove(pago);
+		this.pagos.remove(pago);
 		pago.setcredito(null);
 	}
 	

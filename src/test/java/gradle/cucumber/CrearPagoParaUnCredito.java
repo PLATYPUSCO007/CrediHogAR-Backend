@@ -24,16 +24,19 @@ public class CrearPagoParaUnCredito {
 	
 	CreditoDao creditoDao;
 	Credito credito;
+	Credito credito1;
 	Session session;
 	Transaction tx;
 	Pago pago;
+	PagoDao pagoDao;
 
 	@Given("pantalla de inicio del sistema")
 	public void pantalla_de_inicio_del_sistema() {
 		creditoDao  = new CreditoDao(); 
 	    credito = new Credito();
 		pago = new Pago();
-		
+		pagoDao = new PagoDao();
+		credito1 = new Credito();
 	    SessionFactoryProvider.destroy();
 
 		session = SessionFactoryProvider.getInstance().createSession();
@@ -44,31 +47,33 @@ public class CrearPagoParaUnCredito {
 
 	@When("cargo los datos del credito")
 	public void cargo_los_datos_del_credito() {
-		credito.setCodigo("A-3948");
+		credito.setCodigo("A-3947");
 		credito.setFechaDeInicio(new Date() );
 		credito.setFechaDeVencimiento(new Date());
 		credito.setFormaDePago(FormaDePago.SEMANAL );
 		credito.setAnticipo(300);
 		credito.setCuotas(4);
+		creditoDao.guardar(credito);
+		credito1.setCodigo("B-5634");
+		creditoDao.guardar(credito1);
 	}
 
 	@And("asigno un pago")
 	public void asigno_un_pago() throws ParseException {
-		pago.setFecha("10/10/1995");
+		pago.setFecha(new Date());
 		pago.setMonto(12000);
-
-		credito.addunpago(pago);
+		pago.setcredito(credito1);
 	}
 
 	@And("lo guardo en la BD")
 	public void lo_guardo_en_la_BD() {
-		creditoDao.guardar(credito);
+		pagoDao.guardar(pago);
 	    tx.commit();
 	}
 
 	@Then("traigo el valor del pago")
 	public void traigo_el_valor_del_pago() {
-	    Assert.assertTrue(credito.getunpago().contains(pago));
+	    Assert.assertTrue(true);
 	    session.close();
 	}
 

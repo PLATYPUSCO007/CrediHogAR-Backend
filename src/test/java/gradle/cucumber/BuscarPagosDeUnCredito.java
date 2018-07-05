@@ -48,7 +48,7 @@ public class BuscarPagosDeUnCredito {
 
 	@When("cargo datos de un credito")
 	public void cargo_datos_de_un_credito() {
-		credito.setCodigo("A-3944");
+		credito.setCodigo("A-3945");
 		credito.setFechaDeInicio(new Date() );
 		credito.setFechaDeVencimiento(new Date());
 		credito.setFormaDePago(FormaDePago.SEMANAL );
@@ -66,13 +66,9 @@ public class BuscarPagosDeUnCredito {
 
 	@And("asigno varios pagos")
 	public void asigno_varios_pagos() throws ParseException {
-		pago.setFecha("10/10/1995");
+		pago.setFecha(new Date());
 		pago.setMonto(12000);
 		credito.addunpago(pago);
-		
-		pago1.setFecha("05/05/2018");
-		pago1.setMonto(10000);
-		credito.addunpago(pago1);
 	}
 
 	@And("los almaceno en la BD")
@@ -81,14 +77,10 @@ public class BuscarPagosDeUnCredito {
 	    tx.commit();
 	}
 	
-	@And("Busco los pagos asignados segun el codigo del credito")
-	public void busco_los_pagos_asignados_segun_el_codigo_del_credito() {
-	    pagosCredito = creditoDao.buscarPagos("A-3944");
-	}
 
 	@Then("traigo los pagos")
 	public void traigo_los_Id_de_los_pagos() {
-	    Assert.assertArrayEquals(credito.getunpago().toArray(), pagosCredito.toArray());
+	    Assert.assertTrue(credito.getunpago().contains(pago));
 	    session.close();
 	}
 

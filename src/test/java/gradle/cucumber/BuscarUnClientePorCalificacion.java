@@ -1,5 +1,7 @@
 package gradle.cucumber;
 
+import java.util.List;
+
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -19,7 +21,7 @@ public class BuscarUnClientePorCalificacion {
 	Transaction tx;
 	Cliente cliente;
 	ClienteDao clienteDao;
-	Cliente clienteBuscar;
+	List<Cliente> clienteBuscar;
 	
 	@Given("inicia el sistema")
 	public void inicia_el_sistema() {
@@ -48,13 +50,13 @@ public class BuscarUnClientePorCalificacion {
 
 	@And("Busco el cliente por su calificacion")
 	public void busco_el_cliente_por_su_calificacion() {
-		clienteBuscar = clienteDao.buscarCalificacion("Apto");
+		clienteBuscar = clienteDao.buscarVarios("calificacion", "Apto");
 		tx.commit();
 	}
 
 	@Then("devuelve sus datos")
 	public void devuelve_sus_datos() {
-	    Assert.assertEquals("Apto", clienteBuscar.getCalificacion());
+	    Assert.assertTrue(clienteBuscar.contains(cliente));
 	    session.close();
 	}
 

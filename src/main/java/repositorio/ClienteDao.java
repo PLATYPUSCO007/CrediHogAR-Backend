@@ -1,5 +1,9 @@
 package repositorio;
 
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+
 import modelo.Cliente;
 
 public class ClienteDao extends RepositorioHibernate<Cliente> {
@@ -9,6 +13,7 @@ public class ClienteDao extends RepositorioHibernate<Cliente> {
 	}
 
 	Cliente cliente = new Cliente();
+	List<Cliente> clientes = new ArrayList<Cliente>();
 
 	public Cliente buscarNombre(String nombre) {
 		try {
@@ -49,5 +54,7 @@ public class ClienteDao extends RepositorioHibernate<Cliente> {
 		}
 		return cliente;
 	}
+	
+
 
 }

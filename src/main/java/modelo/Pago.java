@@ -23,7 +23,7 @@ public class Pago implements Serializable {
 	@Id
 	@GeneratedValue
 	public int id;
-	@Temporal(TemporalType.DATE)
+	@Column
 	public Date fecha;
 	@Column
 	public int monto;
@@ -35,10 +35,8 @@ public class Pago implements Serializable {
 		return fecha;
 	}
 
-	public void setFecha(String fecha) throws ParseException {
-		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-		sdf.setLenient(false);
-		this.fecha = sdf.parse(fecha);
+	public void setFecha(Date fecha) {
+		this.fecha=fecha;
 	}
 
 	public int getId() {

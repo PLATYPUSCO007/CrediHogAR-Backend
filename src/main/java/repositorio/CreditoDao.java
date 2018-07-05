@@ -15,8 +15,4 @@ public class CreditoDao extends RepositorioHibernate<Credito>{
 		return super.recuperar("codigo", codigo);
 	}
 
-	public List<Pago> buscarPagos(String codigo) {
-		return this.buscarpagos(codigo);
-	}
-
 }

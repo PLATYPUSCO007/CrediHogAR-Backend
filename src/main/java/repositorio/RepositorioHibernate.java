@@ -88,12 +88,12 @@ public class RepositorioHibernate<T> implements Repositorio<T> {
 		return cantidad;
 	}
 	
-	public List<Pago> buscarpagos(String codigo) {
+	public List<T> buscarVarios(String campo, Serializable valor){
 		Session session = Runner.getCurrentSession();
-		String hql = "FROM Pago p WHERE p.credito IS '" + codigo + "' ";
-		Query query = session.createQuery(hql);
-		List<Pago> cantidad = (List<Pago>) query.getResultList();
-		return cantidad;
+		String hql = "from " + tipo.getSimpleName() + " t " + "where t." + campo + " = :valor ";
+		Query<T> query = session.createQuery(hql, tipo);
+		query.setParameter("valor", valor);
+		return query.getResultList();
 	}
 	
 }
