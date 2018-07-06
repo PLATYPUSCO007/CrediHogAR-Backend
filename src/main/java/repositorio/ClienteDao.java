@@ -4,6 +4,10 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.Session;
+import org.hibernate.query.Query;
+
+import modelo.Articulo;
 import modelo.Cliente;
 
 public class ClienteDao extends RepositorioHibernate<Cliente> {
@@ -13,7 +17,7 @@ public class ClienteDao extends RepositorioHibernate<Cliente> {
 	}
 
 	Cliente cliente = new Cliente();
-	List<Cliente> clientes = new ArrayList<Cliente>();
+
 
 	public Cliente buscarNombre(String nombre) {
 		try {
@@ -47,12 +51,13 @@ public class ClienteDao extends RepositorioHibernate<Cliente> {
 		return cliente;
 	}
 	
-	public Cliente buscarCalificacion(String calificacion) {
-		try {
-			cliente = this.recuperar("calificacion", calificacion);
-		}catch(Exception e){
-		}
-		return cliente;
+	public List<Cliente> buscarClientesSimilares(String campo, String valor) {
+		String valorBuscado = "%" + valor + "%";
+		Session session = Runner.getCurrentSession();
+		String hql = "FROM Cliente a WHERE a. " + campo + " LIKE '" + valorBuscado + "' ";
+		Query query = session.createQuery(hql);
+		List<Cliente> clientes = (List<Cliente>) query.getResultList();
+		return clientes;
 	}
 	
 
