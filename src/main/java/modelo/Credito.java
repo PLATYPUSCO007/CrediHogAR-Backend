@@ -46,6 +46,7 @@ public class Credito implements Serializable  {
     joinColumns = {@JoinColumn(name = "credito_codigo")},
     inverseJoinColumns = {@JoinColumn(name = "articulos_id")})
 	List<Articulo> articulos = new ArrayList<Articulo>();	
+	
 	@ManyToOne(fetch = FetchType.LAZY,  cascade = CascadeType.ALL)
 	Empleado cobrador;
 	  
