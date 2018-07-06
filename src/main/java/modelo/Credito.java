@@ -39,7 +39,7 @@ public class Credito implements Serializable  {
 	Cliente cliente;
 	@Column
 	EstadoDeCredito estado;
-	@OneToMany(fetch = FetchType.EAGER, cascade=CascadeType.ALL,  mappedBy="credito")
+	@OneToMany(fetch = FetchType.EAGER, cascade=CascadeType.ALL,  mappedBy="credito", orphanRemoval = true)
 
 	List<Pago> pagos = new ArrayList<Pago>();
 	
