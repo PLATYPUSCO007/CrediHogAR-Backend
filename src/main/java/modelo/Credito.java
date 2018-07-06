@@ -40,17 +40,16 @@ public class Credito implements Serializable  {
 	@Column
 	EstadoDeCredito estado;
 	@OneToMany(fetch = FetchType.EAGER, cascade=CascadeType.ALL,  mappedBy="credito", orphanRemoval = true)
-
 	List<Pago> pagos = new ArrayList<Pago>();
-	
-	//@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	  @ManyToMany
-      @JoinTable(name = "credito_articulo",
-      joinColumns = {@JoinColumn(name = "credito_codigo")},
-      inverseJoinColumns = {@JoinColumn(name = "articulos_id")})
+	@ManyToMany
+    @JoinTable(name = "credito_articulo",
+    joinColumns = {@JoinColumn(name = "credito_codigo")},
+    inverseJoinColumns = {@JoinColumn(name = "articulos_id")})
 	List<Articulo> articulos = new ArrayList<Articulo>();	
 	
-
+	@ManyToOne(fetch = FetchType.LAZY,  cascade = CascadeType.ALL)
+	Empleado cobrador;
+	  
 	public Credito(){
 		estado = EstadoDeCredito.VIGENTE;
 	}
@@ -129,6 +128,13 @@ public class Credito implements Serializable  {
 	public void setArticulos(List<Articulo> articulos) {
 		this.articulos = articulos;
 	}
+	public Empleado getCobrador() {
+		return cobrador;
+	}
+	public void setCobrador(Empleado cobrador) {
+		this.cobrador = cobrador;
+	}
+	
 	
 	
 }

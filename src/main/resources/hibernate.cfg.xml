@@ -26,6 +26,7 @@
 		<mapping class="modelo.Articulo" />
 		<mapping class="modelo.Pago" />
 		<mapping class="modelo.Credito" />
+		<mapping class="modelo.Empleado" />
 		
 		
     </session-factory>
